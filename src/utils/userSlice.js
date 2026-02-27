@@ -6,6 +6,7 @@ const initialState = {
   phone: "",
   company: "",
   isAgency: false,
+  avatar: "",
 };
 
 const userSlice = createSlice({
@@ -13,10 +14,31 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      return { ...state, ...action.payload };
+      Object.assign(state, action.payload);
+      localStorage.setItem("user", JSON.stringify(state));
+    },
+    updateAvatar: (state, action) => {
+      state.avatar = action.payload;
+      localStorage.setItem("user", JSON.stringify(state));
+    },
+    logoutUser: (state) => {
+      Object.assign(state, initialState);
+      localStorage.removeItem("user");
+    },
+    loadUserFromStorage: (state) => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        Object.assign(state, JSON.parse(storedUser));
+      }
     },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const {
+  setUser,
+  logoutUser,
+  loadUserFromStorage,
+  updateAvatar,
+} = userSlice.actions;
+
 export default userSlice.reducer;

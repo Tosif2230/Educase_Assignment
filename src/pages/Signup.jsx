@@ -39,7 +39,7 @@ const Signup = () => {
 
       {["name", "phone", "email", "password", "company"].map((field) => (
         <div key={field} className="mb-4">
-          <label className="text-xs text-blue-600 font-semibold text-primary capitalize">
+          <label className="text-xs text-blue-600 font-semibold  capitalize">
             {field}
             <span className="text-red-500">*</span>
           </label>
@@ -80,7 +80,7 @@ const Signup = () => {
 
       <button
         onClick={handleSubmit}
-        className="w-full bg-primary text-white py-3 rounded-md font-semibold bg-blue-900"
+        className="w-full text-white py-3 rounded-md font-semibold bg-blue-900"
       >
         Create Account
       </button>
