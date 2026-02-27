@@ -11,6 +11,7 @@ const Signup = () => {
     name: "",
     email: "",
     phone: "",
+    password: "",
     company: "",
     isAgency: true,
   });
@@ -23,25 +24,32 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(setUser(formData));
     navigate("/account");
   };
 
   return (
     <div>
-      <h1 className="text-xl font-bold">Create your PopX account</h1>
+      <h1 className="text-4xl font-sans font-semibold">
+        Create your <br />
+        PopX account
+      </h1>
 
       {["name", "phone", "email", "password", "company"].map((field) => (
         <div key={field} className="mb-4">
-          <label className="text-xs font-semibold text-primary capitalize">
-            {field}<span className="text-red-500">*</span>
+          <label className="text-xs text-blue-600 font-semibold text-primary capitalize">
+            {field}
+            <span className="text-red-500">*</span>
           </label>
           <input
-            type="text"
+            type={field === "password" ? "password" : "text"}
             name={field}
+            value={formData[field]}
             onChange={handleChange}
             className="w-full mt-1 border rounded-md p-2"
+            required
           />
         </div>
       ))}
